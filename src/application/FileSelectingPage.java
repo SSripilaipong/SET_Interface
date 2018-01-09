@@ -2,6 +2,8 @@ package application;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -63,12 +65,13 @@ public class FileSelectingPage extends BorderPane {
 			"choose a folder containing settings and input file or folder"
 		);
 		
-		File pwd = new File(System.getProperty("user.home"));
+		Path settingPath = Paths.get(System.getProperty("user.dir"));
+		settingPath = Paths.get(settingPath.toString(), "settings");
 		
 		settingLabel.setText("setting folder : ");
 		settingLabel.setContentDisplay(ContentDisplay.RIGHT);
 		settingText.setPrefWidth(Main.screenBounds.getWidth()/4);
-		settingText.setText(pwd.toString());
+		settingText.setText(settingPath.toString());
 		settingText.setEditable(false);
 		settingButton.setText("choose folder");
 
@@ -125,7 +128,8 @@ public class FileSelectingPage extends BorderPane {
 			}
 			
 			if(initialDirectory == null){
-				initialDirectory = new File(settingText.getText());
+				Path path = Paths.get(System.getProperty("user.dir")).getParent();
+				initialDirectory = new File(path.toString());
 			}
 			
 			if(!initialDirectory.isDirectory())
@@ -149,7 +153,8 @@ public class FileSelectingPage extends BorderPane {
 			}
 			
 			if(initialDirectory == null){
-				initialDirectory = new File(settingText.getText());
+				Path path = Paths.get(System.getProperty("user.dir")).getParent();
+				initialDirectory = new File(path.toString());
 			}
 			
 			if(!initialDirectory.isDirectory())

@@ -47,6 +47,8 @@ public class RunningPage extends BorderPane {
 				}
 				System.out.println("finished");
 				
+				
+				
 				Platform.runLater(PageManager::showFinishPage);
 			}).start();
 		} catch (IOException e) {
